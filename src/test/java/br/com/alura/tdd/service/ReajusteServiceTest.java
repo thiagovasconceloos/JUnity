@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.alura.tdd.modelo.Desempenho;
@@ -13,11 +17,39 @@ import br.com.alura.tdd.modelo.Funcionario;
 
 public class ReajusteServiceTest {
  
+	private ReajusteService service;
+	private Funcionario fun;
+   
+	
+	
+	@BeforeEach
+	//Antes de Todos
+	public void  inicializar() {
+		service = new ReajusteService();
+		fun = new Funcionario("Thiago Vasconcelos",LocalDate.now(),new BigDecimal("1000"));
+	}
+	
+	@BeforeAll
+	//Executa uma unica vez antes dos testes.
+	public static void antesdeTodos() {
+		System.out.println("Antes de todos");
+	}
+	
+	@AfterAll
+	//Executa uma unica vez depois dos testes.
+	public static void depoisdeTodos() {
+		System.out.println("Depois de todos");
+	}
+	
+	
+	@AfterEach
+	//Depois de todos
+	public void finalizar() {
+		System.out.println("Fim");
+	}
+	
 	@Test
 	public void reajusteADesejar() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fun = new Funcionario("Thiago Vasconcelos",LocalDate.now(),new BigDecimal("1000"));
-		
 		service.concederReajuste(fun,Desempenho.A_DESEJAR);
 		assertEquals(new BigDecimal("1030.00"),fun.getSalario());
 		
@@ -28,10 +60,7 @@ public class ReajusteServiceTest {
 	
 	@Test
 	public void reajusteBom() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fun = new Funcionario("Alexandre Vasconcelos",LocalDate.now(),new BigDecimal("1000"));
-		
-		service.concederReajuste(fun,Desempenho.BOM);
+    	service.concederReajuste(fun,Desempenho.BOM);
 		assertEquals(new BigDecimal("1150.00"),fun.getSalario());
 		
 		
@@ -41,9 +70,6 @@ public class ReajusteServiceTest {
 	
 	@Test
 	public void reajusteOtimo() {
-		ReajusteService service = new ReajusteService();
-		Funcionario fun = new Funcionario("Leonardo Vasconcelos",LocalDate.now(),new BigDecimal("1000"));
-		
 		service.concederReajuste(fun,Desempenho.OTIMO);
 		assertEquals(new BigDecimal("1200.00"),fun.getSalario());
 		
