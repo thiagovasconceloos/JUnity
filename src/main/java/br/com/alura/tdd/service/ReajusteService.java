@@ -15,14 +15,14 @@ public class ReajusteService {
 	    	
 	    }
 		
-	    if(desempenho==Desempenho.BOM) {
+	    else if(desempenho==Desempenho.BOM) {
 	    	BigDecimal reajuste = fun.getSalario().multiply(new BigDecimal("0.15"));
 	    	fun.reajustarSalario(reajuste); 
 	       
 	    	
 	    }
 	    
-	    if(desempenho==Desempenho.OTIMO) {
+	    else {
 	    	BigDecimal reajuste = fun.getSalario().multiply(new BigDecimal("0.20"));
 	    	fun.reajustarSalario(reajuste); 
 	       
